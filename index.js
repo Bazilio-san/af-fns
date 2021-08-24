@@ -27,6 +27,10 @@ module.exports = {
         return str.slice(-numberOfSymbols);
     },
 
+    pads (numberOfSpaces) {
+        return ' '.repeat(Math.min(Math.max(0, numberOfSpaces), 10000));
+    },
+
     getRnd () {
         return Math.random().toString().slice(2, 11) + Math.random().toString().slice(2, 6);
     },
