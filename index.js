@@ -27,8 +27,8 @@ module.exports = {
         return str.slice(-numberOfSymbols);
     },
 
-    pads (numberOfSym, sym = ' ') {
-        return sym.repeat(Math.min(Math.max(0, numberOfSpaces), 10000));
+    pads (numOfSym, sym = ' ') {
+        return sym.repeat(Math.min(Math.max(0, numOfSym), 10000));
     },
 
     getRnd () {
