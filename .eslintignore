@@ -1,1 +1,5 @@
-
+/.run
+/_misc
+/node_modules
+/**/*.d.ts
+/**/*.min.js
