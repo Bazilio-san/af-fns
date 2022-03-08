@@ -16,6 +16,8 @@ function isObject (v) {
     && !(v instanceof Map);
 }
 
+const reTimeParam = /^(\d+)([dhms]$)/i;
+
 module.exports = {
   getRecognitionScore (unrecognizedString, recognizedString) {
     if (!unrecognizedString) return 10;
@@ -418,5 +420,27 @@ module.exports = {
     return new Promise((resolve) => {
       setTimeout(resolve.bind(null, v), t);
     });
+  },
+
+  getTimeParamMillis: (val) => {
+    const [, nn, dhms] = reTimeParam.exec(val || '') || [];
+    if (!nn) {
+      return;
+    }
+    let sec = 0;
+    switch (dhms.toLowerCase()) {
+      case 'd':
+        sec = 24 * 3600 * nn;
+        break;
+      case 'h':
+        sec = 3600 * nn;
+        break;
+      case 'm':
+        sec = 60 * nn;
+        break;
+      default:
+        sec = nn;
+    }
+    return sec * 1000;
   },
 };
