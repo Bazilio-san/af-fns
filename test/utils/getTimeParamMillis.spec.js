@@ -45,8 +45,10 @@ describe('utils.getTimeStamp() should work properly', () => {
     ['3 millisecond', 3],
     ['4 millis', 4],
     ['5ms', 5],
+    ['67890', 67890],
+    [234567, 234567],
   ].forEach(([val, expected]) => {
-    it(val, () => {
+    it(String(val), () => {
       const result = U.getTimeParamMillis(val);
       expect(result).to.equal(expected);
     });

@@ -16,7 +16,7 @@ function isObject (v) {
     && !(v instanceof Map);
 }
 
-const timeParamRE = /^(\d+)\s*(years?|y|months?|mo|weeks?|w|days?|d|hours?|h|minutes?|min|m|seconds?|sec|s|milliseconds?|millis|ms)$/i;
+const timeParamRE = /^(\d+)\s*(years?|y|months?|mo|weeks?|w|days?|d|hours?|h|minutes?|min|m|seconds?|sec|s|milliseconds?|millis|ms|)$/i;
 
 module.exports = {
   getRecognitionScore (unrecognizedString, recognizedString) {
@@ -425,7 +425,7 @@ module.exports = {
   timeParamRE,
 
   getTimeParamMillis: (val) => {
-    const [, nn, dhms] = timeParamRE.exec(val || '') || [];
+    const [, nn, dhms] = timeParamRE.exec(String(val) || '') || [];
     if (!nn) {
       return;
     }
