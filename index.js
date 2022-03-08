@@ -16,7 +16,7 @@ function isObject (v) {
     && !(v instanceof Map);
 }
 
-const timeParamRE = /^(\d+)([dhms]$)/i;
+const timeParamRE = /^(\d+)\s*(years?|y|months?|mo|weeks?|w|days?|d|hours?|h|minutes?|min|m|seconds?|sec|s|milliseconds?|millis|ms)$/i;
 
 module.exports = {
   getRecognitionScore (unrecognizedString, recognizedString) {
@@ -430,18 +430,52 @@ module.exports = {
       return;
     }
     let sec = 0;
+
     switch (dhms.toLowerCase()) {
+      case 'y':
+      case 'year':
+      case 'years':
+        sec = 365 * 24 * 3600 * nn;
+        break;
+      case 'mo':
+      case 'month':
+      case 'months':
+        sec = 30 * 24 * 3600 * nn;
+        break;
+      case 'w':
+      case 'week':
+      case 'weeks':
+        sec = 7 * 24 * 3600 * nn;
+        break;
       case 'd':
+      case 'day':
+      case 'days':
         sec = 24 * 3600 * nn;
         break;
       case 'h':
+      case 'hour':
+      case 'hours':
         sec = 3600 * nn;
         break;
       case 'm':
+      case 'min':
+      case 'minute':
+      case 'minutes':
         sec = 60 * nn;
         break;
-      default:
+      case 's':
+      case 'sec':
+      case 'second':
+      case 'seconds':
         sec = nn;
+        break;
+      case 'ms':
+      case 'millis':
+      case 'millisecond':
+      case 'milliseconds':
+        return +nn;
+      default:
+        return +nn;
     }
     return sec * 1000;
   },
