@@ -16,7 +16,7 @@ function isObject (v) {
     && !(v instanceof Map);
 }
 
-const reTimeParam = /^(\d+)([dhms]$)/i;
+const timeParamRE = /^(\d+)([dhms]$)/i;
 
 module.exports = {
   getRecognitionScore (unrecognizedString, recognizedString) {
@@ -422,8 +422,10 @@ module.exports = {
     });
   },
 
+  timeParamRE,
+
   getTimeParamMillis: (val) => {
-    const [, nn, dhms] = reTimeParam.exec(val || '') || [];
+    const [, nn, dhms] = timeParamRE.exec(val || '') || [];
     if (!nn) {
       return;
     }
